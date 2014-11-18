@@ -1,6 +1,11 @@
 # Fog::Ecloud
 
-TODO: Write a gem description
+Module for the 'fog' gem to support Terremark EnterpriseCloud
+
+## Help Needed
+
+This gem needs a maintainer. If you want to work on it, please contact
+[@geemus](mailto:geemus@gmail.com) or [@plribeiro3000](mailto:plribeiro3000@gmail.com)
 
 ## Installation
 
@@ -24,7 +29,7 @@ TODO: Write usage instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/fog-ecloud/fork )
+1. Fork it ( https://github.com/fog/fog-ecloud/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
