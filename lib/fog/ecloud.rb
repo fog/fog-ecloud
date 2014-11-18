@@ -1,4 +1,5 @@
-require "fog/ecloud/version"
+require 'fog/ecloud/version'
+require 'fog/ecloud/compute'
 
 module Fog
   module Ecloud

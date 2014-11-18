@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "fog-xml"
 
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "shindo"
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "turn"
   spec.add_development_dependency "pry"
