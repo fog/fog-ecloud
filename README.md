@@ -1,5 +1,7 @@
 # Fog::Ecloud
 
+![Gem Version](https://badge.fury.io/rb/fog-ecloud.svg)](http://badge.fury.io/rb/fog-ecloud) [![Build Status](https://travis-ci.org/fog/fog-ecloud.svg?branch=master)](https://travis-ci.org/fog/fog-ecloud) [![Dependency Status](https://gemnasium.com/fog/fog-ecloud.svg)](https://gemnasium.com/fog/fog-ecloud) [![Coverage Status](https://img.shields.io/coveralls/fog/fog-ecloud.svg)](https://coveralls.io/r/fog/fog-ecloud?branch=master) [![Code Climate](https://codeclimate.com/github/fog/fog-ecloud.png)](https://codeclimate.com/github/fog/fog-ecloud)
+
 Module for the 'fog' gem to support Terremark EnterpriseCloud
 
 ## Help Needed
