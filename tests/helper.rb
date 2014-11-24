@@ -2,6 +2,8 @@ if ENV['COVERAGE']
   require 'coveralls'
   require 'simplecov'
 
+  SimpleCov.command_name 'Unit Tests'
+
   SimpleCov.start do
     add_filter '/spec/'
     add_filter '/test/'
