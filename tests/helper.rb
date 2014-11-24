@@ -12,6 +12,10 @@ end
 
 require 'fog/ecloud'
 
+if ENV['COVERAGE']
+  Coveralls.wear!
+end
+
 Excon.defaults.merge!(:debug_request => true, :debug_response => true)
 
 require File.expand_path(File.join(File.dirname(__FILE__), 'helpers', 'mock_helper'))
