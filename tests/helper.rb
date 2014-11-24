@@ -1,3 +1,13 @@
+if ENV['COVERAGE']
+  require 'coveralls'
+  require 'simplecov'
+
+  SimpleCov.start do
+    add_filter '/spec/'
+    add_filter '/test/'
+  end
+end
+
 require 'fog/ecloud'
 
 Excon.defaults.merge!(:debug_request => true, :debug_response => true)
