@@ -243,7 +243,7 @@ module Fog
                                }
                              end#.delete_if { |ip| ip[:href] == options[:href] && ip[:name] == options[:network_name] }
                            end
-          slice_ips.map! { |i| {:name => i.address.name, :network_name => i.network.name, :network_name => i.network.name } }.delete_if { |ip| ip[:name] == options[:ip] }
+          slice_ips.map! { |i| {:name => i.address.name, :network_name => i.network.name } }.delete_if { |ip| ip[:name] == options[:ip] }
           slice_ips.each do |ip|
             slice_networks.each do |network|
               if network[:name] == ip[:network_name]
