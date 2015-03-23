@@ -18,7 +18,7 @@ class Ecloud < Fog::Bin
         hash[key] = case key
                       when :compute
                         Fog::Logger.warning("Ecloud[:compute] is not recommended, use Compute[:ecloud] for portability")
-                        Fog::Compute.new(:provider => 'Ecloud')
+                        Fog::Compute.new(:provider => "Ecloud")
                       else
                         raise ArgumentError, "Unrecognized service: #{key.inspect}"
                     end

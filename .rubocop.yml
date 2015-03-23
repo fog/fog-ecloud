@@ -18,3 +18,9 @@ Style/SignalException:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/ExtraSpacing:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
