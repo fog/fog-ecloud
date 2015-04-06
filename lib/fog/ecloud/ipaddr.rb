@@ -1,5 +1,5 @@
 class IPAddr
-  def mask
+  def mask_string
     _to_string(@mask_addr)
   end
 end
