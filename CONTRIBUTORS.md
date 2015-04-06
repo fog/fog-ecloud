@@ -1,8 +1,10 @@
+* Bryan Paxton <starbelly@pobox.com>
 * Edward Muller <edward@heroku.com>
 * Eugene Howe <ehowe@engineyard.com>
 * Eugene Howe & Josh Lane <ehowe@engineyard.com>
 * Frederick Cheung <frederick.cheung@gmail.com>
 * James Herdman <james.herdman@me.com>
+* Joe Rafaniello <jrafanie@redhat.com>
 * Jesse Newland <jesse@jnewland.com>
 * Kyle Rames <kyle.rames@rackspace.com>
 * Lance Ivy <lance@cainlevy.net>
