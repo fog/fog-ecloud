@@ -338,7 +338,7 @@ module Fog
         end
 
         def netmask
-          self[:netmask] || subnet_ipaddr.mask
+          self[:netmask] || subnet_ipaddr.mask_string
         end
 
         def dns
