@@ -289,8 +289,8 @@ module Fog
           @persistent              = options[:persistent] || false
           @version                 = options[:ecloud_version] || "2013-06-01"
           @authentication_method   = options[:ecloud_authentication_method] || :cloud_api_auth
-          @access_key              = options[:ecloud_access_key]
-          @private_key             = options[:ecloud_private_key]
+          @access_key              = options[:ecloud_access_key].to_s
+          @private_key             = options[:ecloud_private_key].to_s
           if @private_key.nil? || @authentication_method == :basic_auth
             @authentication_method = :basic_auth
             @username              = options[:ecloud_username]
@@ -401,7 +401,7 @@ module Fog
         # section 5.6.3.3 in the ~1000 page pdf spec
         def canonicalize_resource(path)
           uri, query_string = path.split("?")
-          return uri if query_string.nil?
+          return uri.downcase if query_string.nil?
           query_string_pairs = query_string.split("&").sort.map { |e| e.split("=") }
           tm_query_string = query_string_pairs.map { |x| "#{x.first.downcase}:#{x.last}" }.join("\n")
           "#{uri.downcase}\n#{tm_query_string}\n"

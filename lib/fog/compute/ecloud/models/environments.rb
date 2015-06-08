@@ -12,8 +12,18 @@ module Fog
 
         def all
           data = []
-          service.get_organization(href).body[:Locations][:Location].each do |d|
-            environments = d[:Environments]
+          raw_location = service.get_organization(href).body[:Locations][:Location]
+          if raw_location.is_a?(Array)
+            # If there's more than one location, the XML parser returns an
+            # array.
+            location = raw_location
+          else
+            # Otherwise it returns a hash.
+            location = [raw_location]
+          end
+
+          location.each do |l|
+            environments = l[:Environments]
             next unless environments
             if environments[:Environment].is_a?(Array)
               environments[:Environment].each { |e| data << e }
