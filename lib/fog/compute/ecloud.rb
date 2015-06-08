@@ -289,8 +289,8 @@ module Fog
           @persistent              = options[:persistent] || false
           @version                 = options[:ecloud_version] || "2013-06-01"
           @authentication_method   = options[:ecloud_authentication_method] || :cloud_api_auth
-          @access_key              = options[:ecloud_access_key]
-          @private_key             = options[:ecloud_private_key]
+          @access_key              = options[:ecloud_access_key].to_s
+          @private_key             = options[:ecloud_private_key].to_s
           if @private_key.nil? || @authentication_method == :basic_auth
             @authentication_method = :basic_auth
             @username              = options[:ecloud_username]
