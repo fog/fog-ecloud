@@ -39,6 +39,19 @@ module Fog
           end
         end
 
+        # Set instance variables for child collections/models to nil so that they will be reloaded correctly
+        #
+        # @return nothing
+        def reload
+          @locations = nil
+          @environments = nil
+          @tags = nil
+          @admin = nil
+          @users = nil
+          @support_tickets = nil
+          super
+        end
+
         def edit_authentication_levels(options = {})
           options[:uri] = "#{service.base_path}/admin/organizations/#{id}/authenticationLevels"
           data = service.admin_edit_authentication_levels(options).body
