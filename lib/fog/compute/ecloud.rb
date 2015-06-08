@@ -308,7 +308,7 @@ module Fog
           if params[:uri].is_a?(String)
             params[:uri] = URI.parse(@host + params[:uri])
           end
-          host_url = "#{params[:uri].scheme}://#{params[:uri].host}#{params[:uri].port ? ':#{params[:uri].port}' : ''}"
+          host_url = "#{params[:uri].scheme}://#{params[:uri].host}#{params[:uri].port ? ":#{params[:uri].port}" : ''}"
 
           # Hash connections on the host_url ... There"s nothing to say we won"t get URI"s that go to
           # different hosts.
