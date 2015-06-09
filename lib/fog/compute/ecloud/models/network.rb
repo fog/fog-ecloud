@@ -40,6 +40,12 @@ module Fog
         def location
           environment.id
         end
+
+        def reload
+          @rnats = nil
+          @ips = nil
+          super
+        end
       end
     end
   end

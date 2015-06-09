@@ -27,6 +27,11 @@ module Fog
         def id
           href.scan(/\d+/)[0]
         end
+
+        def reload
+          @internet_services = nil
+          super
+        end
       end
     end
   end

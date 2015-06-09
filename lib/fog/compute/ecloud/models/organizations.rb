@@ -32,6 +32,11 @@ module Fog
         def organization_uri=(new_organization_uri)
           @organization_uri = new_organization_uri
         end
+
+        def reload
+          @organization_uri = nil
+          super
+        end
       end
     end
   end

@@ -33,6 +33,11 @@ module Fog
           network_href = other_links.find { |l| l[:type] == "application/vnd.tmrk.cloud.network" }[:href]
           network      = self.service.networks.get(network_href)
         end
+
+        def reload
+          @server = nil
+          super
+        end
       end
     end
   end

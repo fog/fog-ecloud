@@ -91,6 +91,12 @@ module Fog
         end
 
         alias_method :destroy, :delete
+
+        def reload
+          @nodes = nil
+          @monitors = nil
+          super
+        end
       end
     end
   end

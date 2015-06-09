@@ -104,6 +104,24 @@ module Fog
                              self.service.organizations.new(organization_link)
                            end
         end
+
+        def reload
+          @public_ips = nil
+          @internet_services = nil
+          @node_services = nil
+          @backup_internet_services = nil
+          @networks = nil
+          @layout = nil
+          @rows = nil
+          @tasks = nil
+          @firewall_acls = nil
+          @compute_pools = nil
+          @physical_devices = nil
+          @trusted_network_groups = nil
+          @rnats = nil
+          @organization = nil
+          super
+        end
       end
       Vdc = Environment
     end
