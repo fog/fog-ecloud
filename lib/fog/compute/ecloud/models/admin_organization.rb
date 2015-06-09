@@ -37,6 +37,11 @@ module Fog
                               self.service.organizations.new(organization_link)
                             end
         end
+
+        def reload
+          @organization = nil
+          super
+        end
       end
     end
   end

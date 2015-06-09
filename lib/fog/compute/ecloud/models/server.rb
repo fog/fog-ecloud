@@ -317,6 +317,15 @@ module Fog
         end
 
         alias_method :destroy, :delete
+
+        def reload
+          @tasks = nil
+          @processes = nil
+          @hardware_configuration = nil
+          @configuration = nil
+          @networks = nil
+          super
+        end
       end
     end
   end

@@ -64,6 +64,19 @@ module Fog
         def id
           href.scan(/\d+/)[0]
         end
+
+        def reload
+          @servers = nil
+          @layout = nil
+          @cpu_usage = nil
+          @memory_usage = nil
+          @storage_usage = nil
+          @operating_system_families = nil
+          @templates = nil
+          @detached_disks = nil
+          @environment = nil
+          super
+        end
       end
     end
   end

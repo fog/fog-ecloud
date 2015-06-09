@@ -15,6 +15,11 @@ module Fog
         def id
           href.scan(/\d+/)[0]
         end
+
+        def reload
+          @operating_systems = nil
+          super
+        end
       end
     end
   end
