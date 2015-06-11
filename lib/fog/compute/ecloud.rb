@@ -289,8 +289,8 @@ module Fog
           @persistent              = options[:persistent] || false
           @version                 = options[:ecloud_version] || "2013-06-01"
           @authentication_method   = options[:ecloud_authentication_method] || :cloud_api_auth
-          @access_key              = options[:ecloud_access_key].to_s
-          @private_key             = options[:ecloud_private_key].to_s
+          @access_key              = options[:ecloud_access_key]
+          @private_key             = options[:ecloud_private_key]
           if @private_key.nil? || @authentication_method == :basic_auth
             @authentication_method = :basic_auth
             @username              = options[:ecloud_username]
@@ -299,6 +299,11 @@ module Fog
               raise ArgumentError, "No credentials (cloud auth, or basic auth) passed!"
             end
           else
+            if @access_key.nil?
+              raise ArgumentError, "Incomplete cloud auth credentials supplied!"
+            end
+            @private_key = @private_key.to_s
+            @access_key = @access_key.to_s
             @hmac = Fog::HMAC.new("sha256", @private_key)
           end
         end
