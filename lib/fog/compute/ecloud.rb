@@ -357,7 +357,7 @@ module Fog
             "Date"           => Time.now.utc.strftime("%a, %d %b %Y %H:%M:%S GMT"),
           }.merge(params[:headers] || {})
           if params[:method] == "POST" || params[:method] == "PUT" || params[:method] == "DELETE"
-            if !params[:headers]['Content-Length']
+            if !params[:headers]["Content-Length"]
               body_size = 0
               if params[:body]
                 body_size = params[:body].size
