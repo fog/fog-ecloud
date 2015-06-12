@@ -357,7 +357,7 @@ module Fog
             "Date"           => Time.now.utc.strftime("%a, %d %b %Y %H:%M:%S GMT"),
           }.merge(params[:headers] || {})
           if params[:method] == "POST" && params[:body].size > 0
-            params[:headers].merge!("Content-Length" => params[:body].size) unless params[:headers]['Content-Length']
+            params[:headers].merge!("Content-Length" => params[:body].size) unless params[:headers]["Content-Length"]
           end
           if params[:method] == "POST" || params[:method] == "PUT"
             params[:headers].merge!("Content-Type" => "application/xml") unless params[:headers]["Content-Type"]
