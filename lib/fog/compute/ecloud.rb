@@ -356,10 +356,14 @@ module Fog
             "x-tmrk-version" => @version,
             "Date"           => Time.now.utc.strftime("%a, %d %b %Y %H:%M:%S GMT"),
           }.merge(params[:headers] || {})
-          if params[:body].size > 0 || (params[:method] == "POST" || params[:method] == "PUT")
-            params[:headers].merge!("Content-Length" => params[:body].size) unless params[:headers]["Content-Length"]
-          end
-          if params[:method] == "POST" || params[:method] == "PUT"
+          if params[:method] == "POST" || params[:method] == "PUT" || params[:method] == "DELETE"
+            if !params[:headers]['Content-Length']
+              body_size = 0
+              if params[:body]
+                body_size = params[:body].size
+              end
+              params[:headers].merge!("Content-Length" => body_size)
+            end
             params[:headers].merge!("Content-Type" => "application/xml") unless params[:headers]["Content-Type"]
             params[:headers].merge!("Accept" => "application/xml")
           end
