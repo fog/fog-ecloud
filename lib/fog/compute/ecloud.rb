@@ -352,10 +352,18 @@ module Fog
 
         # if Authorization and x-tmrk-authorization are used, the x-tmrk-authorization takes precendence.
         def set_extra_headers_for(params)
+          length_required = ["PUT", "POST", "DELETE"]
           params[:headers] = {
             "x-tmrk-version" => @version,
             "Date"           => Time.now.utc.strftime("%a, %d %b %Y %H:%M:%S GMT"),
           }.merge(params[:headers] || {})
+          if length_required.include?(params[:method]) && !params[:headers]["Content-Length"]
+            body_size = 0
+            if params[:body]
+              body_size = params[:body].size
+            end
+            params[:headers].merge!("Content-Length" => body_size)
+          end
           if params[:method] == "POST" || params[:method] == "PUT"
             params[:headers].merge!("Content-Type" => "application/xml") unless params[:headers]["Content-Type"]
             params[:headers].merge!("Accept" => "application/xml")
