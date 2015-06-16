@@ -9,7 +9,7 @@ module Fog
         def ssh_key_delete(uri)
           ssh_key_id = id_from_uri(uri)
 
-          self.data[:ssh_keys].delete(ssh_key_id)
+          data[:ssh_keys].delete(ssh_key_id)
           response(:body =>  nil, :status => 204)
         end
       end
