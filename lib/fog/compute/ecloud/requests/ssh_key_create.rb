@@ -33,7 +33,7 @@ module Fog
         def ssh_key_create(data)
           ssh_key_id          = Fog::Mock.random_numbers(7).to_i
           ssh_key_fingerprint = ""
-          for x in 1..15
+          (1..15).each do
             ssh_key_fingerprint = ssh_key_fingerprint + Fog::Mock.random_hex(2) + ":"
           end
           ssh_key_fingerprint = ssh_key_fingerprint + Fog::Mock.random_hex(2)
