@@ -9,6 +9,7 @@ module Fog
         attribute :other_links, :aliases => :Links
         attribute :default, :aliases => :Default, :type => :boolean
         attribute :finger_print, :aliases => :FingerPrint
+        attribute :private_key, :aliases => :PrivateKey
 
         def id
           href.scan(/\d+/)[0]
