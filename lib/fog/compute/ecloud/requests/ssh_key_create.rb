@@ -26,6 +26,51 @@ module Fog
           end
         end
       end
+
+      class Mock
+        include Shared
+
+        def ssh_key_create(data)
+          ssh_key_id          = Fog::Mock.random_numbers(7).to_i
+          ssh_key_fingerprint = ""
+          for x in 1..15
+            ssh_key_fingerprint = ssh_key_fingerprint + Fog::Mock.random_hex(2) + ':'
+          end
+          ssh_key_fingerprint = ssh_key_fingerprint + Fog::Mock.random_hex(2)
+          ssh_private_key     = Fog::Mock.random_base64(512)
+          org_id              = self.data[:organization_id]
+          org_name            = self.data[:organization_name]
+
+          ssh_key = {
+            :href                  => "/cloudapi/ecloud/admin/sshKeys/#{ssh_key_id}",
+            :name                  => data[:name],
+            :type                  => "application/vnd.tmrk.cloud.admin.sshKey",
+            :Links => {
+              :Link => {
+                :href => "/cloudapi/ecloud/admin/organizations/#{org_id}",
+                :name => org_name,
+                :type => "application/vnd.tmrk.cloud.admin.organization",
+                :rel  => "up",
+              },
+              :Link => {
+                :href => "/cloudapi/ecloud/organizations/#{org_id}",
+                :name => org_name,
+                :type => "application/vnd.tmrk.cloud.organization",
+                :rel  => "up",
+              },
+            },
+            :Default => data[:default] || false,
+            :FingerPrint => ssh_key_fingerprint,
+            :PrivateKey => ssh_private_key,
+          }
+
+          ssh_key_response = response(:body =>  ssh_key)
+
+          self.data[:ssh_keys][ssh_key_id] = ssh_key
+
+          ssh_key_response
+        end
+      end
     end
   end
 end
