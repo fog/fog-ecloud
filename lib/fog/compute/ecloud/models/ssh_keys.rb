@@ -14,8 +14,8 @@ module Fog
         end
 
         def get(uri)
-          if data = service.get_ssh_key(uri)
-            new(data.body)
+          if data = service.get_ssh_key(uri).body
+            new(data)
           end
         rescue Fog::Errors::NotFound
           nil
