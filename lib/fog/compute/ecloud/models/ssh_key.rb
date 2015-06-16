@@ -12,8 +12,7 @@ module Fog
         attribute :private_key, :aliases => :PrivateKey
 
         def delete
-          data = service.ssh_key_delete(href).body
-          self.service.tasks.new(data)
+          service.ssh_key_delete(href).body
         end
         alias_method :destroy, :delete
 
