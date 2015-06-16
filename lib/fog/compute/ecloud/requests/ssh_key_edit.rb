@@ -7,7 +7,7 @@ module Fog
         def ssh_key_edit(data)
           request(
             :body => generate_ssh_key_edit_request(data),
-            :expects => [202, 204],
+            :expects => 200,
             :method => "PUT",
             :headers => {},
             :uri => data[:uri],
