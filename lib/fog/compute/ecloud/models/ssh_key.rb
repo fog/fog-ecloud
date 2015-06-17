@@ -20,18 +20,18 @@ module Fog
           # Make sure we only pass what we should
           new_options = {}
           new_options[:uri] = href
-          if options[:name].nil?
-            new_options[:name] = name
+          if options[:Name].nil?
+            new_options[:Name] = name
           else
-            new_options[:name] = options[:name]
+            new_options[:Name] = options[:Name]
           end
-          if options[:default].nil?
-            new_options[:default] = default
+          if options[:Default].nil?
+            new_options[:Default] = default
           else
-            new_options[:default] = options[:default]
+            new_options[:Default] = options[:Default]
           end
 
-          service.ssh_key_edit(new_options).body
+          service.ssh_key_edit(new_options)
         end
 
         def id

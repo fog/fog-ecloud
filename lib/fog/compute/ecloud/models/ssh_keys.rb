@@ -24,8 +24,8 @@ module Fog
         def create(options = {})
           # Make sure we only pass what we should
           new_options           = {}
-          new_options[:name]    = options[:name] unless options[:name].nil?
-          new_options[:default] = options[:default] || false
+          new_options[:Name]    = options[:Name] unless options[:Name].nil?
+          new_options[:Default] = options[:Default] || false
           new_options[:uri]     = href + "/action/createSshKey"
 
           data = service.ssh_key_create(new_options)

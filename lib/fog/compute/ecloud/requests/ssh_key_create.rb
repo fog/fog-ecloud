@@ -5,7 +5,7 @@ module Fog
         include Shared
 
         def ssh_key_create(data)
-          validate_data([:name], data)
+          validate_data([:Name], data)
 
           request(
             :body => generate_ssh_key_create_request(data),
@@ -21,8 +21,8 @@ module Fog
 
         def generate_ssh_key_create_request(data)
           xml = Builder::XmlMarkup.new
-          xml.CreateSshKey(:name => data[:name]) do
-            xml.Default data[:default]
+          xml.CreateSshKey(:name => data[:Name]) do
+            xml.Default data[:Default]
           end
         end
       end
@@ -31,7 +31,7 @@ module Fog
         include Shared
 
         def ssh_key_create(data)
-          validate_data([:name], data)
+          validate_data([:Name], data)
           ssh_key_id          = Fog::Mock.random_numbers(7).to_i
           ssh_key_fingerprint = ""
           (1..15).each do
@@ -44,7 +44,7 @@ module Fog
 
           ssh_key = {
             :href                  => "/cloudapi/ecloud/admin/sshKeys/#{ssh_key_id}",
-            :name                  => data[:name],
+            :Name                  => data[:Name],
             :type                  => "application/vnd.tmrk.cloud.admin.sshKey",
             :Links => {
               :Link => {
@@ -60,7 +60,7 @@ module Fog
                 :rel  => "up",
               },
             },
-            :Default => data[:default] || false,
+            :Default => data[:Default] || false,
             :FingerPrint => ssh_key_fingerprint,
             :PrivateKey => ssh_private_key,
           }

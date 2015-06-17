@@ -19,7 +19,7 @@ Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
   end
 
   tests("#create").succeeds do
-    new_key = @ssh_keys.create(:name => "testing")
+    new_key = @ssh_keys.create(:Name => "testing")
     @key_id = new_key.id || nil
     returns(false) { new_key.nil? }
     raises(ArgumentError) { @ssh_keys.create }
@@ -28,10 +28,12 @@ Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
   tests("#edit").succeeds do
     the_key = @ssh_keys.get(@key_id)
     returns(false) { the_key.nil? }
-    the_key.edit(:name => "more testing")
+
+    the_key.edit(:Name => "more testing")
     the_key.reload
     returns(false) { the_key.name != "more testing" }
-    the_key.edit(:default => true)
+
+    the_key.edit(:Default => true)
     the_key.reload
     returns(true) { the_key.default }
   end
