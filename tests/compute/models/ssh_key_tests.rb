@@ -22,7 +22,7 @@ Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
     new_key = @ssh_keys.create(:name => "testing")
     @key_id = new_key.id || nil
     returns(false) { new_key.nil? }
-    raises(ArgumentError) { @ssh_keys.create() }
+    raises(ArgumentError) { @ssh_keys.create }
   end
 
   tests("#edit").succeeds do
