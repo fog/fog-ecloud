@@ -31,6 +31,7 @@ module Fog
         include Shared
 
         def ssh_key_create(data)
+          validate_data([:name], data)
           ssh_key_id          = Fog::Mock.random_numbers(7).to_i
           ssh_key_fingerprint = ""
           (1..15).each do
