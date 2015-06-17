@@ -28,7 +28,7 @@ module Fog
           new_options[:default] = options[:default] || false
           new_options[:uri]     = href + "/action/createSshKey"
 
-          data = service.ssh_key_create(new_options).body
+          data = service.ssh_key_create(new_options)
           object = service.ssh_keys.new(data)
           object
         end

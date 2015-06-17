@@ -14,7 +14,7 @@ module Fog
             :headers => {},
             :uri => data[:uri],
             :parse => true
-          )
+          ).body
         end
 
         private
@@ -68,7 +68,7 @@ module Fog
 
           self.data[:ssh_keys][ssh_key_id] = ssh_key
 
-          ssh_key_response
+          ssh_key_response.body
         end
       end
     end
