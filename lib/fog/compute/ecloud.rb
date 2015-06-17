@@ -229,6 +229,9 @@ module Fog
       request :rows_edit
       request :rows_movedown
       request :rows_moveup
+      request :ssh_key_create
+      request :ssh_key_delete
+      request :ssh_key_edit
       request :trusted_network_groups_create
       request :trusted_network_groups_delete
       request :trusted_network_groups_edit

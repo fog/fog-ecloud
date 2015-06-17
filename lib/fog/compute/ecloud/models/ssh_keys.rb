@@ -14,11 +14,27 @@ module Fog
         end
 
         def get(uri)
-          if data = service.get_ssh_key(uri)
-            new(data.body)
+          if data = service.get_ssh_key(uri).body
+            new(data)
           end
-        rescue Fog::Errors::NotFound
+        rescue Excon::Errors::NotFound
           nil
+        end
+
+        def create(options = {})
+          # Make sure we only pass what we should
+          new_options           = {}
+          new_options[:Name]    = options[:Name] unless options[:Name].nil?
+          new_options[:Default] = options[:Default] || false
+          new_options[:uri]     = href + "/action/createSshKey"
+
+          data = service.ssh_key_create(new_options)
+          object = service.ssh_keys.new(data)
+          object
+        end
+
+        def environment_id
+          href.scan(/\d+/)[0]
         end
       end
     end

@@ -12,7 +12,7 @@ module Fog
 
           if ssh_key
             response(:body => Fog::Ecloud.slice(ssh_key, :id, :admin_organization))
-          else response(:status => 404) # ?
+          else response(:expects => 200, :status => 404) # ?
           end
         end
       end
