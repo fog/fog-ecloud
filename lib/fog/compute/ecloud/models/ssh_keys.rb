@@ -17,7 +17,7 @@ module Fog
           if data = service.get_ssh_key(uri).body
             new(data)
           end
-        rescue Fog::Errors::NotFound
+        rescue Excon::Errors::NotFound
           nil
         end
 
