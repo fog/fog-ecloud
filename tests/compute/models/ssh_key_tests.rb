@@ -15,12 +15,14 @@ Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
     ssh_key = @ssh_keys.first
 
     returns(false) { @ssh_keys.get(ssh_key.href).nil? }
+    returns(false) { @ssh_keys.get("/notfound" + ssh_key.href).nil? }
   end
 
   tests("#create").succeeds do
     new_key = @ssh_keys.create(:name => "testing")
     @key_id = new_key.id || nil
     returns(false) { new_key.nil? }
+    raises(ArgumentError) { @ssh_keys.create() }
   end
 
   tests("#edit").succeeds do
@@ -29,6 +31,9 @@ Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
     the_key.edit(:name => "more testing")
     the_key.reload
     returns(false) { the_key.name != "more testing" }
+    the_key.edit(:default => true)
+    the_key.reload
+    returns(true) { the_key.default }
   end
 
   tests("#delete").succeeds do
