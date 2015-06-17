@@ -28,10 +28,10 @@ module Fog
       class Mock
         def ssh_key_edit(options)
           ssh_key_id = id_from_uri(options[:uri]).to_i
-          if self.data[:ssh_keys][ssh_key_id]
-            self.data[:ssh_keys][ssh_key_id][:Name] = options[:Name]
-            self.data[:ssh_keys][ssh_key_id][:Default] = options[:Default]
-            ssh_key = self.data[:ssh_keys][ssh_key_id]
+          if data[:ssh_keys][ssh_key_id]
+            data[:ssh_keys][ssh_key_id][:Name] = options[:Name]
+            data[:ssh_keys][ssh_key_id][:Default] = options[:Default]
+            ssh_key = data[:ssh_keys][ssh_key_id]
             response(:body => Fog::Ecloud.slice(ssh_key, :id, :admin_organization)).body
           else
             response(:expects => 200, :status => 404)
