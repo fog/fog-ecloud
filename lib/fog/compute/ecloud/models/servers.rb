@@ -32,11 +32,11 @@ module Fog
           new(data)
         end
 
-        def create( template_uri, options )
-          options[:cpus]        ||= 1
-          options[:memory]      ||= 512
+        def create(template_uri, options)
+          options[:cpus] ||= 1
+          options[:memory] ||= 512
           options[:description] ||= ""
-          options[:tags]        ||= []
+          options[:tags] ||= []
 
           if template_uri =~ /\/templates\/\d+/
             options[:uri] = href + "/action/createVirtualMachine"
@@ -47,17 +47,17 @@ module Fog
             else
               [*options[:network_uri]].each do |uri|
                 index = options[:network_uri].index(uri)
-                ip = self.service.ip_addresses(:href => uri).find { |i| i.host == nil && i.detected_on.nil? }.name
+                ip = service.ip_addresses(:href => uri).detect { |i| i.host == nil && i.detected_on.nil? }.name
                 options[:ips] ||= []
                 options[:ips][index] = ip
               end
             end
-            data = service.virtual_machine_create_from_template( template_uri, options ).body
+            data = service.virtual_machine_create_from_template(template_uri, options).body
           else
             options[:uri] = href + "/action/importVirtualMachine"
-            data = service.virtual_machine_import( template_uri, options ).body
+            data = service.virtual_machine_import(template_uri, options).body
           end
-          object = self.service.servers.new(data)
+          object = service.servers.new(data)
           object
         end
       end

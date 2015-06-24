@@ -1,4 +1,4 @@
-provider, config = :ecloud, compute_providers[:ecloud]
+provider = :ecloud
 
 Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
   connection = Fog::Compute[provider]

@@ -31,7 +31,7 @@ module Fog
           options[:enabled] ||= true
           options[:description] ||= ""
           data = service.node_service_create(options).body
-          object = new(data)
+          new(data)
         end
 
         def internet_service_id

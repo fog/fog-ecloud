@@ -9,7 +9,7 @@ module Fog
         model Fog::Compute::Ecloud::Network
 
         def all
-          body = service.get_networks(self.href).body
+          body = service.get_networks(href).body
           body = body[:Networks] ? body[:Networks][:Network] : body[:Network]
           data = case body
                  when NilClass then []
