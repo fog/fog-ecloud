@@ -12,7 +12,9 @@ module Fog
 
           if ssh_key
             response(:body => Fog::Ecloud.slice(ssh_key, :id, :admin_organization))
-          else response(:expects => 200, :status => 404) # ?
+          else
+            body = "<Error message=\"Resource Not Found\" majorErrorCode=\"404\" minorErrorCode=\"ResourceNotFound\" />"
+            response(:body => body, :expects => 200, :status => 404)
           end
         end
       end
