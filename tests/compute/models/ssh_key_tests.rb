@@ -41,6 +41,7 @@ Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
   tests("#delete").succeeds do
     the_key = @ssh_keys.get(@key_id)
     returns(false) { the_key.nil? }
+
     the_key.delete
     the_key = @ssh_keys.get(@key_id)
     returns(false) { !the_key.nil? }
