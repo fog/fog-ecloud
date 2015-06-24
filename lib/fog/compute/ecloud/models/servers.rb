@@ -23,7 +23,8 @@ module Fog
         def get(uri)
           data = service.get_server(uri).body
           new(data)
-        rescue Fog::Errors::NotFound
+        rescue ServiceError => e
+          raise e unless e.status_code == 404
           nil
         end
 

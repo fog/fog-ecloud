@@ -309,7 +309,7 @@ module Fog
           requires :href
           begin
             service.send(op.keys.first, href + "/action/#{op.values.first}" )
-          rescue Excon::Errors::Conflict => e
+          rescue ServiceError => e
             #Frankly we shouldn't get here ...
             raise e unless e.to_s =~ /because it is already powered o(n|ff)/
           end

@@ -27,7 +27,8 @@ module Fog
           if data = service.get_role(uri)
             new(data.body)
           end
-        rescue Fog::Errors::NotFound
+        rescue ServiceError => e
+          raise e unless e.status_code == 404
           nil
         end
       end
