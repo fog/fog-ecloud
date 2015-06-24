@@ -9,7 +9,7 @@ module Fog
         model Fog::Compute::Ecloud::SshKey
 
         def all
-          data = service.get_ssh_keys(href).body[:SshKey]
+          data = service.get_ssh_keys(href).body[:SshKey] || []
           load(data)
         end
 
