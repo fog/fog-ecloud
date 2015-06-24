@@ -12,7 +12,9 @@ module Fog
 
           if network
             response(:body => Fog::Ecloud.slice(network, :id, :environment_id))
-          else response(:status => 404) # ?
+          else
+            body = "<Error message=\"Resource Not Found\" majorErrorCode=\"404\" minorErrorCode=\"ResourceNotFound\" />"
+            response(:body => body, :expects => 200, :status => 404)
           end
         end
       end

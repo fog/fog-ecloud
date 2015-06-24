@@ -11,7 +11,9 @@ module Fog
           ip_address = self.data[:networks][network_id.to_i][:IpAddresses][:IpAddress].find{|ip| ip[:name] == ip_address_id }.dup
           if ip_address
             response(:body => ip_address)
-          else response(:status => 404) # ?
+          else
+            body = "<Error message=\"Resource Not Found\" majorErrorCode=\"404\" minorErrorCode=\"ResourceNotFound\" />"
+            response(:body => body, :expects => 200, :status => 404)
           end
         end
       end

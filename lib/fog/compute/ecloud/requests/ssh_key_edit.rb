@@ -34,7 +34,8 @@ module Fog
             ssh_key = data[:ssh_keys][ssh_key_id]
             response(:body => Fog::Ecloud.slice(ssh_key, :id, :admin_organization)).body
           else
-            response(:expects => 200, :status => 404)
+            body = "<Error message=\"Resource Not Found\" majorErrorCode=\"404\" minorErrorCode=\"ResourceNotFound\" />"
+            response(:body => body, :expects => 200, :status => 404)
           end
         end
       end
