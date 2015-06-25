@@ -10,14 +10,15 @@ module Fog
 
         def all
           data = service.get_detached_disks(href).body[:DetachedDisk]
-					data = [] if data.nil?
+          data = [] if data.nil?
           load(data)
         end
 
         def get(uri)
           data = service.get_detached_disk(uri).body
           new(data)
-        rescue Fog::Errors::NotFound
+        rescue ServiceError => e
+          raise e unless e.status_code == 404
           nil
         end
       end

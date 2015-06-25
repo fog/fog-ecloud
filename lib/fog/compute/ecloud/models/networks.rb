@@ -9,7 +9,7 @@ module Fog
         model Fog::Compute::Ecloud::Network
 
         def all
-          body = service.get_networks(self.href).body
+          body = service.get_networks(href).body
           body = body[:Networks] ? body[:Networks][:Network] : body[:Network]
           data = case body
                  when NilClass then []
@@ -23,7 +23,8 @@ module Fog
           if data = service.get_network(uri)
             new(data.body)
           end
-        rescue Fog::Errors::NotFound
+        rescue ServiceError => e
+          raise e unless e.status_code == 404
           nil
         end
       end

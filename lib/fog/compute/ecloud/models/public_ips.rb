@@ -17,13 +17,14 @@ module Fog
         def get(uri)
           data = service.get_public_ip(uri).body
           new(data)
-        rescue Fog::Errors::NotFound
+        rescue ServiceError => e
+          raise e unless e.status_code == 404
           nil
         end
 
         def activate
           data = service.public_ip_activate(href + "/action/activatePublicIp").body
-          ip = Fog::Compute::Ecloud::PublicIps.new(:service => service, :href => data[:href])[0]
+          Fog::Compute::Ecloud::PublicIps.new(:service => service, :href => data[:href])[0]
         end
       end
     end

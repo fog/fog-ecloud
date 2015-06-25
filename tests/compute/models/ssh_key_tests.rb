@@ -1,4 +1,4 @@
-provider, config = :ecloud, compute_providers[:ecloud]
+provider = :ecloud
 
 Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
   connection = Fog::Compute[provider]
@@ -15,7 +15,7 @@ Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
     ssh_key = @ssh_keys.first
 
     returns(false) { @ssh_keys.get(ssh_key.href).nil? }
-    returns(false) { @ssh_keys.get("/notfound" + ssh_key.href).nil? }
+    returns(true) { @ssh_keys.get(ssh_key.href + "314159").nil? }
   end
 
   tests("#create").succeeds do
@@ -41,6 +41,7 @@ Shindo.tests("Fog::Compute[:#{provider}] | ssh_keys", [provider.to_s]) do
   tests("#delete").succeeds do
     the_key = @ssh_keys.get(@key_id)
     returns(false) { the_key.nil? }
+
     the_key.delete
     the_key = @ssh_keys.get(@key_id)
     returns(false) { !the_key.nil? }

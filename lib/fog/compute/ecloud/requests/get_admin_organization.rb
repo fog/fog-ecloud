@@ -8,13 +8,15 @@ module Fog
       class Mock
         def get_admin_organization(uri)
           organization_id = id_from_uri(uri)
-          admin_organization    = self.data[:admin_organizations][organization_id]
+          admin_organization = data[:admin_organizations][organization_id]
 
           if admin_organization
             body = Fog::Ecloud.slice(admin_organization, :id, :organization_id)
 
             response(:body => body)
-          else response(:status => 404) # ?
+          else
+            body = "<Error message=\"Resource Not Found\" majorErrorCode=\"404\" minorErrorCode=\"ResourceNotFound\" />"
+            response(:body => body, :expects => 200, :status => 404)
           end
         end
       end

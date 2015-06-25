@@ -8,12 +8,12 @@ module Fog
       class Mock
         def get_environment(uri)
           environment_id = id_from_uri(uri)
-          organizations = self.data[:organizations].values
+          organizations = data[:organizations].values
           environment = nil
           catch(:found) do
             organizations.each do |organization|
               organization[:Locations][:Location].each do |location|
-                environment = location[:Environments][:Environment].find{|e| e[:id] == environment_id}
+                environment = location[:Environments][:Environment].detect { |e| e[:id] == environment_id }
                 throw :found if environment
               end
             end
@@ -22,7 +22,9 @@ module Fog
             body = environment.dup
             body.delete(:id)
             response(:body => body)
-          else response(:status => 404) # ?
+          else
+            body = "<Error message=\"Resource Not Found\" majorErrorCode=\"404\" minorErrorCode=\"ResourceNotFound\" />"
+            response(:body => body, :expects => 200, :status => 404)
           end
         end
       end

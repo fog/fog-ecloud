@@ -20,19 +20,20 @@ module Fog
         def get(uri)
           data = service.get_internet_service(uri).body
           new(data)
-        rescue Fog::Errors::NotFound
+        rescue ServiceError => e
+          raise e unless e.status_code == 404
           nil
         end
 
         def create(options)
           options[:uri] = "#{service.base_path}/internetServices/publicIps/#{public_ip_id}/action/createInternetService"
-          options[:protocol]           ||= "TCP"
-          options[:enabled]            ||= true
-          options[:description]        ||= ""
-          options[:persistence]        ||= {}
+          options[:protocol] ||= "TCP"
+          options[:enabled] ||= true
+          options[:description] ||= ""
+          options[:persistence] ||= {}
           options[:persistence][:type] ||= "None"
           data = service.internet_service_create(options).body
-          object = new(data)
+          new(data)
         end
 
         def public_ip_id

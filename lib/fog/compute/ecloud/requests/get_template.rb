@@ -7,12 +7,14 @@ module Fog
 
       class Mock
         def get_template(uri)
-          template_id, compute_pool_id = uri.match(/(\d+).*\/(\d+)$/).captures
-          template    = self.data[:templates][template_id.to_i]
+          template_id, _compute_pool_id = uri.match(/(\d+).*\/(\d+)$/).captures
+          template = data[:templates][template_id.to_i]
 
           if template
             response(:body => Fog::Ecloud.slice(template, :id, :environment))
-          else response(:status => 404) # ?
+          else
+            body = "<Error message=\"Resource Not Found\" majorErrorCode=\"404\" minorErrorCode=\"ResourceNotFound\" />"
+            response(:body => body, :expects => 200, :status => 404)
           end
         end
       end

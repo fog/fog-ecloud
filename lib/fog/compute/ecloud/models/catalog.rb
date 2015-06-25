@@ -9,7 +9,7 @@ module Fog
         model Fog::Compute::Ecloud::CatalogItem
 
         def all
-          data = service.get_catalog(href).body#[:Locations][:Location][:Catalog][:CatalogEntry]
+          data = service.get_catalog(href).body # [:Locations][:Location][:Catalog][:CatalogEntry]
           if data[:Locations][:Location].is_a?(Hash)
             data = [] if data[:Locations][:Location][:Catalog].is_a?(String) && data[:Locations][:Location][:Catalog].empty?
             load(data)
@@ -30,7 +30,8 @@ module Fog
           if data = service.get_catalog_item(uri)
             new(data.body)
           end
-        rescue Fog::Errors::NotFound
+        rescue ServiceError => e
+          raise e unless e.status_code == 404
           nil
         end
       end

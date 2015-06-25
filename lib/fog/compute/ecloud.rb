@@ -1,5 +1,6 @@
 require File.expand_path("../ecloud/models/model", __FILE__)
 require File.expand_path("../ecloud/models/collection", __FILE__)
+require File.expand_path("../ecloud/errors", __FILE__)
 
 module Fog
   module Compute
@@ -268,6 +269,9 @@ module Fog
 
       class Real
         include Shared
+        include Errors
+
+        class Fog::Compute::Ecloud::ServiceError < Fog::Ecloud::Errors::ServiceError; end
 
         class << self
           def basic_request(name, expects = [200], method = :get, headers = {}, body = "")
@@ -335,7 +339,13 @@ module Fog
           unless params[:body].nil? || params[:body].empty?
             options.merge!(:body => params[:body])
           end
-          response = @connections[host_url].request(options)
+
+          begin
+            response = @connections[host_url].request(options)
+          rescue Excon::Errors::Error => error
+            raise ServiceError.slurp(error)
+          end
+
           # Parse the response body into a hash
           unless response.body.empty?
             if params[:parse]
@@ -426,6 +436,9 @@ module Fog
 
       class Mock
         include Shared
+        include Errors
+
+        class Fog::Compute::Ecloud::ServiceError < Fog::Ecloud::Errors::ServiceError; end
 
         def self.data
           @data ||= Hash.new do |hash, key|
@@ -828,7 +841,9 @@ module Fog
 
           response = Excon::Response.new(:body => body, :headers => headers, :status => status)
           if params.key?(:expects) && ![*params[:expects]].include?(response.status)
-            raise(Excon::Errors.status_error(params, response))
+            e = Excon::Errors::NotFound.new("Expected([200]) <=> Actual(404 Not Found)", "404", response)
+            raise ServiceError.slurp(e)
+
           else response
           end
         end
