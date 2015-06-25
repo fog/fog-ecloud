@@ -271,7 +271,7 @@ module Fog
         include Shared
         include Errors
 
-        class Fog::Compute::Ecloud::ServiceError < Fog::Ecloud::Errors::ServiceError ; end
+        class Fog::Compute::Ecloud::ServiceError < Fog::Ecloud::Errors::ServiceError; end
 
         class << self
           def basic_request(name, expects = [200], method = :get, headers = {}, body = "")
@@ -438,7 +438,7 @@ module Fog
         include Shared
         include Errors
 
-        class Fog::Compute::Ecloud::ServiceError < Fog::Ecloud::Errors::ServiceError ; end
+        class Fog::Compute::Ecloud::ServiceError < Fog::Ecloud::Errors::ServiceError; end
 
         def self.data
           @data ||= Hash.new do |hash, key|
