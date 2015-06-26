@@ -93,7 +93,7 @@ Shindo.tests("Fog::Compute[:#{provider}] | authentication", [provider.to_s, "liv
       :ecloud_username => nil,
       :ecloud_password => nil,
       :ecloud_access_key => 99999999999999999999999999999999,
-      :ecloud_private_key => 9999999999999999999999999999999999999999999999999999999999999999,
+      :ecloud_private_key => 9999999999999999999999999999999999999999999999999999999999999999
     )
     foo = service.organizations(:uri => "/organizations").first
     foo.class
