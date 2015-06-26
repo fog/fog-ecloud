@@ -8,11 +8,13 @@ Rake::TestTask.new do |t|
 end
 
 namespace :test do
-  mock = ENV['FOG_MOCK'] || 'true'
-  task :travis do
-    sh("export FOG_MOCK=#{mock} && bundle exec shindont")
+  task :mock do
+    sh("export FOG_MOCK=true && bundle exec shindont -livespec")
+  end
+  task :livespec do
+    sh("export FOG_MOCK=false && bundle exec shindont +livespec")
   end
 end
 
 desc 'Default Task'
-task :default => [ :test, 'test:travis' ]
+task :default => [ :test, 'test:mock', 'test:livespec' ]
