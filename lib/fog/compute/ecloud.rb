@@ -397,7 +397,7 @@ module Fog
         end
 
         def cloud_api_signature(params)
-          verb = params[:method].upcase
+          verb = params[:method].to_s.upcase
           headers = params[:headers]
           path = params[:uri].path
           canonicalized_headers = canonicalize_headers(headers)
