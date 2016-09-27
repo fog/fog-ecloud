@@ -399,7 +399,7 @@ module Fog
         def cloud_api_signature(params)
           verb = params[:method].to_s.upcase
           headers = params[:headers]
-          path = params[:uri].path
+          path = params[:uri].path + "#{"?#{params[:uri].query}" if params[:uri].query}"
           canonicalized_headers = canonicalize_headers(headers)
           canonicalized_resource = canonicalize_resource(path)
           string = [
@@ -429,8 +429,8 @@ module Fog
           uri, query_string = path.split("?")
           return uri.downcase if query_string.nil?
           query_string_pairs = query_string.split("&").sort.map { |e| e.split("=") }
-          tm_query_string = query_string_pairs.map { |x| "#{x.first.downcase}:#{x.last}" }.join("\n")
-          "#{uri.downcase}\n#{tm_query_string}\n"
+          tm_query_string = query_string_pairs.map { |x| "#{x.first.downcase}:#{x.last.downcase}" }.join("\n")
+          "#{uri.downcase}\n#{tm_query_string}"
         end
       end
 
